@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+    db:
+        image: postgres:12-alpine
+        restart: always
+        environment:
+            POSTGRES_DB: items
+            POSTGRES_PASSWORD: bTA3azhkRFpwNDRkbHUK
+        ports:
+            - 5432:5432
+        expose: 
+            - 5432
+        networks:
+            - api-net
+networks:
+    api-net:
