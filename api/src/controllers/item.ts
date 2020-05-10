@@ -43,6 +43,10 @@ class ItemController {
 
     return itemRepository.delete(item)
   }
+
+  static async bulkDelete(ids: string[]): Promise<DeleteResult> {
+    return getRepository(Item).delete(ids)
+  }
 }
 
 export default ItemController

@@ -1,16 +1,16 @@
 import React, {
-  ReactChildren,
   FunctionComponent,
   ChangeEvent,
   Fragment,
+  ReactNode,
 } from "react";
 import styled from "styled-components";
 
 const StyledCheckbox = styled.input``;
 
 interface CheckBoxProps {
-  children?: ReactChildren | string;
-  onChange?: (event: ChangeEvent<HTMLElement>) => void;
+  children?: ReactNode;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   checked?: boolean;
 }
 

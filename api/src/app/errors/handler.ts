@@ -29,6 +29,14 @@ const handleError = (res: Response, error: Error): Response => {
         error_description: 'User already exists.',
       }
       break
+    case 'token_expired':
+      errorCode = 401
+      errorMessage = {
+        code: errorCode,
+        error: 'token_expired',
+        error_description: 'Token expired.',
+      }
+      break
     default:
       errorCode = 400
       errorMessage = {

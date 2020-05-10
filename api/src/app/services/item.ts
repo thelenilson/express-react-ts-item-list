@@ -9,6 +9,7 @@ class ItemService {
     router.get('/', this.findAll)
     router.post('/', this.create)
     router.put('/:id', this.update)
+    router.delete('/_bulk', this.bulkDelete)
     router.delete('/:id', this.delete)
 
     return router
@@ -68,6 +69,20 @@ class ItemService {
     try {
       const { id } = req.params
       const item = await ItemController.delete(id)
+      const data = {
+        type: 'item',
+        ...item,
+      }
+      return res.status(200).json({ data })
+    } catch (error) {
+      return handleError(res, error)
+    }
+  }
+
+  static async bulkDelete(req: Request, res: Response): Promise<Response> {
+    try {
+      const { ids } = req.body
+      const item = await ItemController.bulkDelete(ids)
       const data = {
         type: 'item',
         ...item,

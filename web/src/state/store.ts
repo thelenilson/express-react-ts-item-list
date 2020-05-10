@@ -5,9 +5,11 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 // Reducers
 import { authReducer } from "./modules/auth/reducers";
+import { itemReducer } from "./modules/item/reducers";
 
 const reducers = combineReducers({
   auth: authReducer,
+  items: itemReducer,
 });
 
 const configureStore = (initialState: object) => {

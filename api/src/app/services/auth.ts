@@ -18,15 +18,25 @@ class AuthService {
       return handleError(res, new Error('no_auth_info'))
     }
 
-    const [email, password] = Buffer.from(
-      authorization.replace('Basic ', ''),
-      'base64'
-    )
-      .toString()
-      .split(':')
+    let email
+    let password
+    let token
+
+    if (authorization.includes('Basic')) {
+      ;[email, password] = Buffer.from(
+        authorization.replace('Basic ', ''),
+        'base64'
+      )
+        .toString()
+        .split(':')
+    }
+
+    if (authorization.includes('Bearer')) {
+      token = authorization.replace('Bearer ', '')
+    }
 
     try {
-      const tokens = await AuthController.login(email, password)
+      const tokens = await AuthController.login(email, password, token)
 
       return res.status(200).json(tokens)
     } catch (error) {

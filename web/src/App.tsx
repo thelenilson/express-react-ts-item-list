@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 
 import Home from "./pages/home";
 import Login from "./pages/login";
+import SignUp from "./pages/signup";
 import PrivateRoute from "./components/private";
 
 import createStore from "./state/store";
@@ -16,7 +17,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/signup" component={() => <h1>Sign Up</h1>} />
+          <Route path="/signup" component={SignUp} />
           <PrivateRoute path="/" component={Home} />
         </Switch>
       </Router>

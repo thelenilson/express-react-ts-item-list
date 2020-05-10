@@ -8,9 +8,22 @@ import Input from "../components/form/Input";
 import CheckBox from "../components/form/Checkbox";
 import Button from "../components/form/Button";
 
-import login from "../state/modules/auth/requests";
+import { login } from "../state/modules/auth/requests";
 
 const LoginBox = styled.div``;
+
+const Form = styled.form`
+  width: 85%;
+  height: 300px;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+`;
+
+const CheckBoxWrapper = styled.div`
+  width: 100%;
+`;
 
 interface LoginProps {
   login: (username: string, password: string) => void;
@@ -54,8 +67,7 @@ const Login: FunctionComponent<LoginProps> = ({ login }) => {
   return (
     <LoginBox>
       {toHome || cookies["auth_info"] ? <Redirect to="/" /> : null}
-      <form
-        action=""
+      <Form
         onSubmit={(event) => {
           event.preventDefault();
           AuthenticateUser(email, password, login, setError, setToHome);
@@ -65,6 +77,7 @@ const Login: FunctionComponent<LoginProps> = ({ login }) => {
           type="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
+          required
         >
           Email
         </Input>
@@ -75,13 +88,12 @@ const Login: FunctionComponent<LoginProps> = ({ login }) => {
         >
           Password
         </Input>
-        <CheckBox>Remember me</CheckBox>
         {error && error.type === "general" ? <div>{error.message}</div> : null}
         <Button type="submit">Login</Button>
-      </form>
-      <p>
-        Don't have an account yet? <Link to="/signup">Sign Up</Link>
-      </p>
+        <p>
+          Don't have an account yet? <Link to="/signup">Sign Up</Link>
+        </p>
+      </Form>
     </LoginBox>
   );
 };
